@@ -1,0 +1,46 @@
+.game-pad {
+  display: inline-block;
+  border-radius: 50%;
+  border: 30px solid black;
+}
+
+.button-container {
+  display: grid;
+  /*box-sizing: border-box;*/
+  grid-template-columns: 300px 300px;
+  grid-template-rows: 300px 300px;
+  grid-template-areas:
+    "green-btn red-btn"
+    "yellow-btn blue-btn";
+  grid-column-gap: 30px;
+  grid-row-gap: 30px;
+  width: 630px;
+  height: 630px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.green-btn, .red-btn, .yellow-btn, .blue-btn {
+  width: 300px;
+  height: 300px;
+}
+
+.green-btn {
+  background-color: green;
+  border-radius: 300px 0 0 0;
+}
+
+.red-btn {
+  background-color: red;
+  border-radius: 0 300px 0 0;
+}
+
+.yellow-btn {
+  background-color: yellow;
+  border-radius: 0 0 0 300px;
+}
+
+.blue-btn {
+  background-color: blue;
+  border-radius: 0 0 300px 0;
+}
