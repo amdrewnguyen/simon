@@ -9,11 +9,11 @@ const WRONG = {freq: 42, btnSelector: ".wrong-btn"};
 const COLORS = [GREEN, RED, YELLOW, BLUE];
 
 // easy
-// const sequence = [GREEN, RED, YELLOW, BLUE, GREEN];
+const sequence = [GREEN, RED, YELLOW, BLUE, GREEN];
 // medium
 // const sequence = [GREEN, RED, YELLOW, BLUE, GREEN, GREEN, GREEN];
 // hard
-const sequence = [GREEN, RED, RED, YELLOW, BLUE, RED, YELLOW, BLUE, GREEN, GREEN, GREEN, RED, YELLOW, BLUE];
+// const sequence = [GREEN, RED, RED, YELLOW, BLUE, RED, YELLOW, BLUE, GREEN, GREEN, GREEN, RED, YELLOW, BLUE];
 
 function buttonPress(color, dur=0.42, offset) {
   const button = document.querySelector(color.btnSelector);
@@ -68,12 +68,28 @@ function playSequence() {
 }
 
 function receiveSequence() {
+  const greenButton = document.querySelector(".green-btn");
+  const redButton = document.querySelector(".red-btn");
+  const yellowButton = document.querySelector(".yellow-btn");
+  const blueButton = document.querySelector(".blue-btn");
+
+  const buttons = {
+    ".green-btn": greenButton,
+    ".red-btn": redButton,
+    ".yellow-btn": yellowButton,
+    ".blue-btn": blueButton,
+  };
+
   let i = 0;
 
   const buttonContainer = document.querySelector(".button-container");
   buttonContainer.addEventListener("click", (e) => {
-    console.log(e.target);
-    i++;
+    if (buttons[sequence[i].btnSelector] === e.target) {
+      console.log("thats the button!");
+      i++;
+    } else {
+      console.log("thats NOT the button!");
+    }
   });
 
   // loop through sequence
