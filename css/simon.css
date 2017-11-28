@@ -22,6 +22,11 @@
 .green-btn, .red-btn, .yellow-btn, .blue-btn {
   width: 300px;
   height: 300px;
+  opacity: 0.5;
+}
+
+.pressed {
+  opacity: 1;
 }
 
 .green-btn {
