@@ -1,53 +1,16 @@
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+class Simon {
+  constructor() {
+    this.sequence = [];
+  }
 
-const GREEN = {freq: 415.305, btnSelector: ".green-btn"};
-const RED = {freq: 311.127, btnSelector: ".red-btn"};
-const YELLOW = {freq: 247.942, btnSelector: ".yellow-btn"};
-const BLUE = {freq: 207.652, btnSelector: ".blue-btn"};
-const WRONG = {freq: 42, btnSelector: ".wrong-btn"};
-
-const COLORS = [GREEN, RED, YELLOW, BLUE];
-
-// easy
-const sequence = [GREEN, RED, YELLOW, BLUE, GREEN];
-// medium
-// const sequence = [GREEN, RED, YELLOW, BLUE, GREEN, GREEN, GREEN];
-// hard
-// const sequence = [GREEN, RED, RED, YELLOW, BLUE, RED, YELLOW, BLUE, GREEN, GREEN, GREEN, RED, YELLOW, BLUE];
-
-function buttonPress(color, dur=0.42, offset) {
-  const button = document.querySelector(color.btnSelector);
-
-  // create Oscillator node
-  let oscillator = audioCtx.createOscillator();
-  let start = offset || audioCtx.currentTime;
-  oscillator.type = 'square';
-  oscillator.frequency.value = color.freq; // value in hertz
-  oscillator.connect(audioCtx.destination);
-
-  oscillator.onended = () => button.classList.remove("pressed");
-  oscillator.start(start);
-  oscillator.stop(start + dur);
+  nextTurn() {
+    let i = Math.floor(Math.random() * 4);
+    this.sequence.unshift(COLORS[i]);
+    playSequence();
+  }
 }
 
-function playWrong(dur=0.42) {
-  // create Oscillator node
-  let oscillator = audioCtx.createOscillator();
-  let start = audioCtx.currentTime;
-  oscillator.type = 'square';
-  oscillator.frequency.value = WRONG.freq; // value in hertz
-  oscillator.connect(audioCtx.destination);
-
-  oscillator.start(start);
-  oscillator.stop(start + dur);
-}
-
-function nextTurn() {
-  let i = Math.floor(Math.random() * 4);
-  sequence.unshift(COLORS[i]);
-  playSequence();
-  receiveSequence();
-}
+export default Simon;
 
 function playSequence() {
   const greenButton = document.querySelector(".green-btn");
@@ -132,6 +95,12 @@ function receiveSequence() {
 function receiveNextPress() {
 
 }
+
+// buttonPress(GREEN, 0, 0.42);
+// buttonPress(RED, 0, 0.42);
+// buttonPress(RED, 0.47, 0.42);
+// buttonPress(YELLOW, 0.94, 0.42);
+// buttonPress(BLUE, 1.41, 0.42);
 
 document.addEventListener("DOMContentLoaded", () => {
   // const greenButton = document.querySelector(".green-btn");
